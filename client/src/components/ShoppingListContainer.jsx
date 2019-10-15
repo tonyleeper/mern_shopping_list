@@ -22,9 +22,9 @@ class ShoppingList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className={styles.shoppingList}>
-                        {items.map(({ id, name }) => (
+                        {items.map(({ _id, name }) => (
                             <CSSTransition
-                                key={id}
+                                key={_id}
                                 timeout={500}
                                 classNames="fade"
                             >
@@ -33,7 +33,10 @@ class ShoppingList extends Component {
                                         style={{ marginRight: '0.5rem' }}
                                         color="danger"
                                         size="sm"
-                                        onClick={this.deleteItem.bind(this, id)}
+                                        onClick={this.deleteItem.bind(
+                                            this,
+                                            _id
+                                        )}
                                     >
                                         &times;
                                     </Button>
