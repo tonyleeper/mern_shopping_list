@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AppNavbar } from './components/AppNavbar'
+import { AppNavbarContainer } from './components/AppNavbarContainer'
 import { ShoppingListContainer } from './components/ShoppingListContainer'
 import { ItemModalContainer } from './components/ItemModalContainer'
 import { Container } from 'reactstrap'
@@ -20,7 +20,7 @@ export class App extends Component {
         return (
             <Provider store={store}>
                 <div>
-                    <AppNavbar />
+                    <AppNavbarContainer />
                     <Container>
                         <ItemModalContainer />
                         <ShoppingListContainer />

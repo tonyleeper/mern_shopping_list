@@ -8,6 +8,12 @@ import PropTypes from 'prop-types'
 import styles from './ShoppingList.module.css'
 
 class ShoppingList extends Component {
+    static propTypes = {
+        getItems: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool,
+    }
+
     componentDidMount() {
         this.props.getItems()
     }
@@ -18,6 +24,7 @@ class ShoppingList extends Component {
 
     render() {
         const { items } = this.props.item
+        const { isAuthenticated } = this.props
         return (
             <Container>
                 <ListGroup>
@@ -29,17 +36,19 @@ class ShoppingList extends Component {
                                 classNames="fade"
                             >
                                 <ListGroupItem>
-                                    <Button
-                                        style={{ marginRight: '0.5rem' }}
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.deleteItem.bind(
-                                            this,
-                                            _id
-                                        )}
-                                    >
-                                        &times;
-                                    </Button>
+                                    {isAuthenticated ? (
+                                        <Button
+                                            style={{ marginRight: '0.5rem' }}
+                                            color="danger"
+                                            size="sm"
+                                            onClick={this.deleteItem.bind(
+                                                this,
+                                                _id
+                                            )}
+                                        >
+                                            &times;
+                                        </Button>
+                                    ) : null}
                                     {name}
                                 </ListGroupItem>
                             </CSSTransition>
@@ -51,13 +60,9 @@ class ShoppingList extends Component {
     }
 }
 
-ShoppingList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired,
-}
-
 const mapStateToProps = state => ({
     item: state.item,
+    isAuthenticated: state.auth.isAuthenticated,
 })
 
 export const ShoppingListContainer = connect(
